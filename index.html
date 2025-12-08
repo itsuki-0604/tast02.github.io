@@ -13,10 +13,18 @@
             font-family: sans-serif;
         }
         h1 {
-            color: #ff1493;
-            -webkit-text-stroke: 2px black;
+            /* 明るいピンクに変更して黒とのコントラストを強調 */
+            color: #ff69b4; 
+            
+            /* 黒い縁取りを1pxに細くして文字をつぶれにくくする */
+            -webkit-text-stroke: 1px black;
+            
+            /* 右下に黒い影を落として、くっきり浮かび上がらせる */
+            text-shadow: 4px 4px 0 #000;
+            
             font-size: 3em;
             margin-bottom: 0.5em;
+            font-weight: bold;
         }
         p {
             line-height: 1.6;
