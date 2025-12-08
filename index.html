@@ -1,19 +1,384 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>タイトル</title>
-    <link rel="stylesheet" href="e2a.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Data Center Inzai | アジアのデジタルハブ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* テック・ビジネス向けの基本設定 */
+        :root {
+            --primary-color: #4285F4; /* Google Blue */
+            --secondary-color: #34A853; /* Google Green (アクセント) */
+            --accent-red: #EA4335;    /* Google Red */
+            --accent-yellow: #FBBC05; /* Google Yellow */
+            --text-color: #202124;    /* Dark Gray */
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --dark-bg: #202124;
+        }
+
+        body {
+            font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; padding: 0; }
+
+        /* ヘッダー */
+        header {
+            background-color: var(--white);
+            border-bottom: 1px solid #ddd;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #5f6368;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* ヒーローセクション（テック感のあるデザイン） */
+        .hero {
+            /* サーバーやネットワークを想起させる背景 */
+            background: linear-gradient(rgba(32, 33, 36, 0.8), rgba(32, 33, 36, 0.8)), url('https://placehold.co/1920x1080/1a73e8/FFFFFF/png?text=Hyperscale+Data+Center') no-repeat center center/cover;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: #e8eaed;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 40px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            background-color: #3367D6;
+            transform: translateY(-2px);
+        }
+
+        /* セクション共通 */
+        section {
+            padding: 100px 0;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 60px;
+            color: var(--text-color);
+        }
+
+        h2 span {
+            border-bottom: 4px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        /* Why Inzai (選ばれる理由) */
+        .reasons {
+            background-color: var(--white);
+        }
+
+        .reason-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .reason-card {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .reason-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            background: #e8f0fe;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .reason-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* 施設の特徴 */
+        .features {
+            background-color: var(--bg-light);
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+
+        .feature-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-text h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-img {
+            flex: 1;
+        }
+
+        .feature-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* ロケーションマップ/アクセス */
+        .location-section {
+            background-color: var(--dark-bg);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .location-section h2 {
+            color: var(--white);
+        }
+
+        .tech-specs {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .spec-item {
+            text-align: center;
+        }
+        
+        .spec-item .value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .spec-item .label {
+            font-size: 1rem;
+            color: #9aa0a6;
+        }
+
+        /* フッター */
+        footer {
+            background-color: #171717;
+            color: #999;
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .feature-item, .feature-item:nth-child(even) { flex-direction: column; }
+            .nav-links { display: none; }
+        }
+    </style>
 </head>
 <body>
 
-    <h1>これは大見出し（h1）です</h1>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fab fa-google fa-lg" style="color: var(--primary-color);"></i>
+                    INZAI DATA CENTER
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#why">Why Inzai</a></li>
+                    <li><a href="#features">Innovation</a></li>
+                    <li><a href="#location">Location</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <h2>これは中見出し（h2）です</h2>
-    <p>ここに本文（p）を書きます。</p>
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>世界をつなぐ、<br>印西のコア・インフラ。</h1>
+            <p>Googleの日本初となるデータセンターが稼働。<br>強固な地盤と豊富な電力が、明日のイノベーションを支える。</p>
+            <a href="#features" class="btn">施設概要を見る</a>
+        </div>
+    </section>
 
-    <h2>別のセクションの見出し（h2）</h2>
-    <p>ここにも本文（p）を書きます。</p>
+    <section id="why" class="reasons">
+        <div class="container">
+            <h2><span>なぜ、印西市なのか</span></h2>
+            <div class="reason-grid">
+                <div class="reason-card">
+                    <div class="reason-icon"><i class="fas fa-layer-group"></i></div>
+                    <h3>強固な地盤「下総台地」</h3>
+                    <p>印西市は活断層が極めて少なく、硬質な地盤である「下総台地」に位置しています。地震のリスクが低いことは、24時間365日の稼働が求められるデータセンターにとって最大のメリットです。</p>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>安定した電力供給</h3>
+                    <p>千葉ニュータウンエリアは、高圧電力のインフラ整備が進んでおり、ハイパースケールデータセンターが必要とする膨大な電力を安定的に供給可能です。</p>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>低遅延なネットワーク</h3>
+                    <p>都心から約40km、成田空港から約15kmという立地。海底ケーブルの陸揚げ局にも近く、アジア太平洋地域へのハブとして最適な通信環境を備えています。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2><span>テクノロジーとサステナビリティ</span></h2>
+            
+            <div class="feature-item">
+                <div class="feature-text">
+                    <h3>日本初のGoogleデータセンター</h3>
+                    <p>2023年、印西市にてGoogleの日本初となるデータセンターが開設されました。これにより、Google CloudやGmail、YouTubeなどのサービスへのアクセス速度と安定性が、日本のユーザー向けに大幅に向上しました。</p>
+                </div>
+                <div class="feature-img">
+                    <img src="https://placehold.co/600x400/4285F4/FFFFFF/png?text=Google+Logo+on+Building" alt="Google Inzai Building">
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-text">
+                    <h3>カーボンフリーエネルギーの追求</h3>
+                    <p>Googleは24時間365日、カーボンフリーエネルギーで稼働することを目指しています。印西のデータセンターでも、最新の冷却技術と再生可能エネルギーの活用により、環境負荷を最小限に抑えた運営が行われています。</p>
+                </div>
+                <div class="feature-img">
+                    <img src="https://placehold.co/600x400/34A853/FFFFFF/png?text=Solar+Panels+&+Cooling" alt="Sustainability">
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-text">
+                    <h3>地域経済への貢献</h3>
+                    <p>このプロジェクトは、数十億ドル規模のインフラ投資であるだけでなく、地域の雇用創出や、日本のデジタルトランスフォーメーション（DX）加速への貢献が期待されています。</p>
+                </div>
+                <div class="feature-img">
+                    <img src="https://placehold.co/600x400/EA4335/FFFFFF/png?text=Community+&+Tech" alt="Community Support">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="location" class="location-section">
+        <div class="container">
+            <h2>LOCATION INFO</h2>
+            <p>千葉県印西市（千葉ニュータウンエリア）</p>
+            
+            <div class="tech-specs">
+                <div class="spec-item">
+                    <span class="value">No.1</span>
+                    <span class="label">国内データセンター集積地</span>
+                </div>
+                <div class="spec-item">
+                    <span class="value">High</span>
+                    <span class="label">地盤安定性 (下総台地)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="value">Global</span>
+                    <span class="label">アジアの通信ハブ</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 50px;">
+                <a href="https://www.google.com/about/datacenters/" target="_blank" class="btn" style="background-color: transparent; border: 2px solid var(--white);">Google Data Centers 公式サイトへ <i class="fas fa-external-link-alt"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>※ これはデモサイトです。Google公式のページではありません。</p>
+            <p>&copy; 2023 Inzai Tech Hub Introduction.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
